@@ -3,7 +3,6 @@ package cn.xianbin.queryengine.request.function;
 
 import cn.xianbin.queryengine.expression.column.AbstractColumn;
 import cn.xianbin.queryengine.expression.filter.AbstractFilter;
-import cn.xianbin.queryengine.request.Parser;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public abstract class FunctionCondition {
         this.params = params;
     }
 
-    public abstract void parse(Parser parser) throws Exception;
+    public abstract void parse() throws Exception;
 
     public abstract AbstractFilter createFilter(AbstractColumn abstractColumn);
 

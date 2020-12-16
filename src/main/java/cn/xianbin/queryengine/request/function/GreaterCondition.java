@@ -4,7 +4,6 @@ import cn.xianbin.queryengine.error.parameter.FilterParamNumException;
 import cn.xianbin.queryengine.expression.column.AbstractColumn;
 import cn.xianbin.queryengine.expression.filter.AbstractFilter;
 import cn.xianbin.queryengine.expression.filter.Greater;
-import cn.xianbin.queryengine.request.Parser;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class GreaterCondition extends FunctionCondition {
     }
 
     @Override
-    public void parse(Parser parser) throws Exception {
+    public void parse() throws Exception {
         if (this.params.size() != 1) {
             throw new FilterParamNumException(this.function, 1);
         }

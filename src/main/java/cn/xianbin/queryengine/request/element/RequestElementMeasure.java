@@ -1,7 +1,6 @@
 package cn.xianbin.queryengine.request.element;
 
 import cn.xianbin.queryengine.common.AggregatorType;
-import cn.xianbin.queryengine.request.Parser;
 import cn.xianbin.queryengine.request.RequestElementValidator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +21,7 @@ public class RequestElementMeasure implements RequestElementValidator {
     private List<Object> params;
 
     @Override
-    public void parse(Parser parser) throws Exception {
+    public void parse() throws Exception {
         if (StringUtils.isNotEmpty(this.aggregator)) {
             this.aggregator = AggregatorType.fromName(this.aggregator).name().toLowerCase();
         }

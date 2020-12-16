@@ -20,22 +20,22 @@ import java.util.List;
 @AllArgsConstructor
 public class QueryRequest implements RequestElementValidator, Serializable {
 
-    private String table;
     private List<RequestElementMeasure> measures;
+    private String table;
     private RequestElementFilter filter;
-    private List<String> byFields;
+    private List<String> groupByList;
+    private List<Integer> orderByList;
     private Long limit;
 
     @Override
-    public void parse(final Parser parser) throws Exception {
+    public void parse() throws Exception {
         if (CollectionUtils.isNotEmpty(this.measures)) {
             for (RequestElementMeasure measure : this.measures) {
-                measure.parse(parser);
+                measure.parse();
             }
         }
-
         if (this.filter != null) {
-            this.filter.parse(parser);
+            this.filter.parse();
         }
     }
 

@@ -1,6 +1,5 @@
 package cn.xianbin.queryengine.request.element;
 
-import cn.xianbin.queryengine.request.Parser;
 import cn.xianbin.queryengine.request.RequestElementValidator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,16 +24,16 @@ public class RequestElementFilter implements RequestElementValidator, Serializab
     private List<RequestElementFilter> filters;
 
     @Override
-    public void parse(Parser parser) throws Exception {
+    public void parse() throws Exception {
         if (CollectionUtils.isNotEmpty(this.conditions)) {
             for (RequestElementCondition condition : conditions) {
-                condition.parse(parser);
+                condition.parse();
             }
         }
 
         if (CollectionUtils.isNotEmpty(this.filters)) {
             for (RequestElementFilter filter : filters) {
-                filter.parse(parser);
+                filter.parse();
             }
         }
     }

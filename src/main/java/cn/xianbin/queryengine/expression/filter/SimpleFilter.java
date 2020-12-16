@@ -2,6 +2,7 @@ package cn.xianbin.queryengine.expression.filter;
 
 
 import cn.xianbin.queryengine.expression.column.AbstractColumn;
+import cn.xianbin.queryengine.utils.DataUtil;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,14 +20,7 @@ public class SimpleFilter extends AbstractFilter {
 
     @Override
     public String constructSql() throws Exception {
-        Serializable richValue;
-        if (this.value instanceof Number) {
-            richValue = this.value.toString();
-        } else if (this.value instanceof Date) {
-            richValue = ((Date) this.value).getTime();
-        } else {
-            richValue = String.format("'%s'", this.value);
-        }
+        Serializable richValue = DataUtil.richValue(this.value);
         return String.format("%s %s %s", super.getColumn().getId(), this.operator, richValue);
     }
 

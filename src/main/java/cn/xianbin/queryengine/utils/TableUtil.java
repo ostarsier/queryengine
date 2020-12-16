@@ -6,6 +6,7 @@ import cn.xianbin.queryengine.error.parameter.QueryParameterErrorType;
 import cn.xianbin.queryengine.error.parameter.QueryParameterException;
 import cn.xianbin.queryengine.expression.column.AtomColumn;
 import cn.xianbin.queryengine.expression.column.ExpressionColumn;
+import cn.xianbin.queryengine.expression.function.Count;
 import cn.xianbin.queryengine.expression.function.Max;
 import cn.xianbin.queryengine.request.element.RequestElementMeasure;
 
@@ -15,6 +16,9 @@ public class TableUtil {
         AggregatorType aggregatorType = AggregatorType.fromName(measure.getAggregator());
         AtomColumn column = new AtomColumn(measure.getField(), alias);
         switch (aggregatorType) {
+            case COUNT: {
+                return new ExpressionColumn(alias, new Count(false), column);
+            }
             case MAX: {
                 return new ExpressionColumn(alias, new Max(), column);
             }

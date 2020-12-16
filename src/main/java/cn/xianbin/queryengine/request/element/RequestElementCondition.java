@@ -1,6 +1,5 @@
 package cn.xianbin.queryengine.request.element;
 
-import cn.xianbin.queryengine.request.Parser;
 import cn.xianbin.queryengine.request.RequestElementValidator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +22,7 @@ public class RequestElementCondition implements RequestElementValidator, Seriali
     private List<Object> params;
 
     @Override
-    public void parse(Parser parser) throws Exception {
+    public void parse() throws Exception {
     }
 
     @Override

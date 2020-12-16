@@ -3,11 +3,9 @@ package cn.xianbin.queryengine.table;
 import cn.xianbin.queryengine.expression.Limit;
 import cn.xianbin.queryengine.expression.SqlGenerator;
 import cn.xianbin.queryengine.expression.column.AbstractColumn;
-import cn.xianbin.queryengine.expression.column.ExpressionColumn;
 import cn.xianbin.queryengine.expression.filter.AbstractFilter;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,38 +14,21 @@ import java.util.StringJoiner;
 
 @Slf4j
 @Data
-public class AbstractTable implements SqlGenerator, Serializable {
+public class Table implements SqlGenerator, Serializable {
 
     protected String tableName;
-    private String tableAlias;
     protected List<AbstractColumn> columns = new ArrayList<>();
-    protected Limit limit;
+    private AbstractFilter filter;
     private List<String> groupByList;
-    private Boolean orderByAsc;
-    private List<AbstractFilter> filters;
+    private List<Integer> orderByList;
+    protected Limit limit;
 
-    private List<Pair<AbstractTable, JoinType>> joinTables;
-    private List<List<SqlGenerator>> joinConditions;
-    private List<ExpressionColumn> expressionColumns;
-
-    public enum JoinType {
-        INNER,
-        LEFT,
-        RIGHT,
-        FULL;
-    }
-
-    public AbstractTable(String tableName, String tableAlias) {
+    public Table(String tableName) {
         this.tableName = tableName;
-        this.tableAlias = tableAlias;
     }
 
     protected String constructWhere() throws Exception {
-        StringJoiner sql = new StringJoiner(" AND ");
-        for (AbstractFilter andFilter : filters) {
-            sql.add(andFilter.constructSql());
-        }
-        return sql.toString();
+        return filter.constructSql();
     }
 
     public void addSelect(AbstractColumn field) {
@@ -77,6 +58,21 @@ public class AbstractTable implements SqlGenerator, Serializable {
             for (String groupBy : groupByList) {
                 groupBySql.add("`" + groupBy + "`");
             }
+            sb.append(groupBySql);
+        }
+
+        if (this.orderByList != null) {
+            sb.append("\n\t");
+            sb.append("ORDER BY ");
+            StringJoiner orderBySql = new StringJoiner(",");
+            for (Integer orderBy : orderByList) {
+                orderBySql.add(orderBy.toString());
+            }
+            sb.append(orderBySql);
+        }
+        if (this.limit != null) {
+            sb.append("\n\t");
+            sb.append(limit.constructSql());
         }
         return sb.toString();
     }
