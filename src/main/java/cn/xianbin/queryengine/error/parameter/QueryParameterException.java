@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class QueryParameterException extends QueryEngineException {
+
     private QueryParameterErrorType errorType;
     private Map<String, Object> errorAttrs;
 

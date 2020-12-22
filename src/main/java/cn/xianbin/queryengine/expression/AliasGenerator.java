@@ -1,6 +1,7 @@
 package cn.xianbin.queryengine.expression;
 
 public class AliasGenerator {
+
     private int a;
     private String b;
     private static int c = 25;

@@ -1,6 +1,7 @@
 package cn.xianbin.queryengine.table;
 
 import cn.xianbin.queryengine.expression.Limit;
+import cn.xianbin.queryengine.expression.OrderBy;
 import cn.xianbin.queryengine.expression.SqlGenerator;
 import cn.xianbin.queryengine.expression.column.AbstractColumn;
 import cn.xianbin.queryengine.expression.filter.AbstractFilter;
@@ -20,7 +21,7 @@ public class Table implements SqlGenerator, Serializable {
     protected List<AbstractColumn> columns = new ArrayList<>();
     private AbstractFilter filter;
     private List<String> groupByList;
-    private List<Integer> orderByList;
+    private List<OrderBy> orderByList;
     protected Limit limit;
 
     public Table(String tableName) {
@@ -65,8 +66,8 @@ public class Table implements SqlGenerator, Serializable {
             sb.append("\n\t");
             sb.append("ORDER BY ");
             StringJoiner orderBySql = new StringJoiner(",");
-            for (Integer orderBy : orderByList) {
-                orderBySql.add(orderBy.toString());
+            for (OrderBy orderBy : orderByList) {
+                orderBySql.add(orderBy.constructSql());
             }
             sb.append(orderBySql);
         }

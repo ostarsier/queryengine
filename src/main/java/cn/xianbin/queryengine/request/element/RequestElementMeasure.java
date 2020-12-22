@@ -17,6 +17,7 @@ import java.util.List;
 public class RequestElementMeasure implements RequestElementValidator {
 
     private String field;
+    private String alias;
     private String aggregator;
     private List<Object> params;
 

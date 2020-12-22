@@ -9,6 +9,7 @@ import cn.xianbin.queryengine.expression.column.ExpressionColumn;
 import cn.xianbin.queryengine.expression.function.Count;
 import cn.xianbin.queryengine.expression.function.Max;
 import cn.xianbin.queryengine.request.element.RequestElementMeasure;
+import org.apache.commons.lang3.StringUtils;
 
 public class TableUtil {
 

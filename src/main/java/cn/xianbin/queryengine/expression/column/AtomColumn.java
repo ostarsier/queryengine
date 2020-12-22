@@ -12,7 +12,6 @@ public class AtomColumn extends AbstractColumn {
         this.name = name;
     }
 
-
     @Override
     public String getId() throws Exception {
         return this.name;

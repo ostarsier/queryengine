@@ -18,9 +18,9 @@ public class Count implements ExecutableExpression {
             return "COUNT(1)";
         }
         if (distinct) {
-            return String.format("COUNT (DISTINCT %s)", column.getId());
+            return String.format("COUNT(DISTINCT %s)", column.getId());
         } else {
-            return String.format("COUNT (%s)", column.getId());
+            return String.format("COUNT(%s)", column.getId());
         }
     }
 

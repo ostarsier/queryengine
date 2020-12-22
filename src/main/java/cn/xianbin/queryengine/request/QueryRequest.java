@@ -1,6 +1,8 @@
 package cn.xianbin.queryengine.request;
 
 
+import cn.xianbin.queryengine.expression.GroupBy;
+import cn.xianbin.queryengine.expression.OrderBy;
 import cn.xianbin.queryengine.request.element.RequestElementFilter;
 import cn.xianbin.queryengine.request.element.RequestElementMeasure;
 import lombok.AllArgsConstructor;
@@ -23,8 +25,8 @@ public class QueryRequest implements RequestElementValidator, Serializable {
     private List<RequestElementMeasure> measures;
     private String table;
     private RequestElementFilter filter;
-    private List<String> groupByList;
-    private List<Integer> orderByList;
+    private List<GroupBy> groupByList;
+    private List<OrderBy> orderByList;
     private Long limit;
 
     @Override

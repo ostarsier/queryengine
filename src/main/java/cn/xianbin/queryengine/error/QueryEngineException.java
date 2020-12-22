@@ -1,8 +1,9 @@
 package cn.xianbin.queryengine.error;
 
 public abstract class QueryEngineException extends RuntimeException {
-    public QueryEngineException(String s) {
-        super(s);
+
+    public QueryEngineException(String message) {
+        super(message);
     }
 
     QueryEngineException(Exception ex) {
